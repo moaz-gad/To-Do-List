@@ -2,6 +2,7 @@ import ToDoForm from "./ToDoForm"
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import ToDo from "./ToDo"
+import EditToDoForm from "./EditToDoForm"
 
 interface Todo {
   id: string
@@ -12,13 +13,16 @@ interface Todo {
 const ToDoWrapper = () => {
   const [todos, setTodos] = useState<Todo[]>([])
 
-  const addToDo = (todo: string) => {
+  const addToDo = (insertedTask: string) => {
     setTodos([
       ...todos,
-      { id: uuidv4(), task: todo, completed: false, isEditing: false },
+      { id: uuidv4(), task: insertedTask, completed: false, isEditing: false },
     ])
-    console.log(todos[0].task)
   }
+  const deleteTodo = (id: string) => {
+    setTodos(todos.filter((todo) => todo.id !== id))
+  }
+
   const toggleComplete = (id: string) => {
     setTodos(
       todos.map((todo) =>
@@ -26,13 +30,43 @@ const ToDoWrapper = () => {
       )
     )
   }
+
+  const editTodo = (id: String) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isEditing: !todo.isEditing } : todo
+      )
+    )
+  }
+
+  const editTask = (task: string, id: string) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, task, isEditing: !todo.isEditing } : todo
+      )
+    )
+  }
   return (
-    <div className="TodoWrapper">
-      <ToDoForm addToDo={addToDo} />
-      {todos.map((todo, index) => (
-        <ToDo task={todo} key={index} toggleComplete={toggleComplete} />
-      ))}
-    </div>
+    <>
+      <div className="TodoWrapper">
+        <h1>Today's Tasks</h1>
+        <ToDoForm addToDo={addToDo} />
+        {todos.map((todo, index) =>
+          todo.isEditing ? (
+            <EditToDoForm editTodo={editTask} task={todo} />
+          ) : (
+            <ToDo
+              key={index}
+              task={todo}
+              deleteTodo={deleteTodo}
+              editTodo={editTodo}
+              toggleComplete={toggleComplete}
+            />
+          )
+        )}
+      </div>
+      <span className="footer-txt">Made by/ Moaz gad</span>
+    </>
   )
 }
 export default ToDoWrapper

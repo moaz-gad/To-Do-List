@@ -7,8 +7,10 @@ const ToDoForm = ({ addToDo }: Props) => {
   const [value, setValue] = useState("")
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     addToDo(value)
-    setValue("")
+
+    setValue("") //To reset the value
   }
   return (
     <form className="TodoForm" onSubmit={handleSubmit}>
