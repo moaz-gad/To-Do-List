@@ -1,15 +1,15 @@
 {
-  "homepage": "https://moaz-gad.github.io/To-Do-List",
+  "homepage": "http://moaz-gad.github.io/To-Do-List",
   "name": "to-do-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
