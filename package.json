@@ -1,4 +1,5 @@
 {
+  "homepage": "https://moaz-gad.github.io/To-Do-List",
   "name": "to-do-app",
   "private": true,
   "version": "0.0.0",
@@ -6,7 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
@@ -20,6 +23,7 @@
     "@types/react-dom": "^18.0.11",
     "@types/uuid": "^9.0.1",
     "@vitejs/plugin-react": "^3.1.0",
+    "gh-pages": "^5.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
   }
